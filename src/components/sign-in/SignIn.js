@@ -9,7 +9,7 @@ import {
 import FormInput from '../form-input/FormInput';
 
 import './SignIn.styles.scss';
-import Button from './../button/Button';
+import Button, { BUTTON_TYPES_CLASSES } from '../button/Button';
 
 const defaultFormFields = {
   email: '',
@@ -20,24 +20,22 @@ const SignIn = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
-  const resetFormFields = {
-    setFormFields: defaultFormFields,
+  const resetFormFields = () => {
+    setFormFields(defaultFormFields);
   };
 
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+    await signInWithGooglePopup();
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
-      const response = await signInAuthUserWithEmailAndPassword(
+      const { user } = await signInAuthUserWithEmailAndPassword(
         email,
         password
       );
-      console.log(response);
+
       resetFormFields();
     } catch (error) {
       switch (error.code) {
@@ -84,8 +82,12 @@ const SignIn = () => {
 
         <div className='buttons-container'>
           <Button type='submit'>Sign In</Button>
-          <Button type='button' onClick={signInWithGoogle} buttonType='google'>
-            Sign In with Google
+          <Button
+            buttonType={BUTTON_TYPES_CLASSES.google}
+            type='button'
+            onClick={signInWithGoogle}
+          >
+            Sign In With Google
           </Button>
         </div>
       </form>
