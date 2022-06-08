@@ -7,8 +7,6 @@ import './index.scss';
 import reportWebVitals from './reportWebVitals';
 
 import App from './App';
-import { UserProvider } from './contexts/User.context';
-import { CategoriesProvider } from './contexts/Categories.context';
 import { CartProvider } from './contexts/Cart.context';
 import { store } from './store/store';
 
@@ -16,11 +14,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-          <CategoriesProvider>
             <CartProvider>
               <App />
             </CartProvider>
-          </CategoriesProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
