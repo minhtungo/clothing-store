@@ -5,9 +5,8 @@ import { useSelector } from 'react-redux';
 import { ReactComponent as Logo } from '../../assets/corgi.svg';
 import CartDropdown from '../../components/cart-dropdown/CartDropdown';
 import CartIcon from '../../components/cart-icon/CartIcon';
-import { CartContext } from '../../contexts/Cart.context';
-import { UserContext } from '../../contexts/User.context';
 
+import { selectIsCartOpen } from '../../store/cart/cart.selector';
 import { selectCurrentUser } from '../../store/user/user.selector';
 
 import { signOutUser } from '../../utils/firebase/firebase';
@@ -21,7 +20,7 @@ import {
 
 const Navigation = () => {
   const currentUser = useSelector(selectCurrentUser);
-  const { isCartOpen } = useContext(CartContext);
+  const isCartOpen = useSelector(selectIsCartOpen);
 
   return (
     <>
