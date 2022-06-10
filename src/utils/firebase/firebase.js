@@ -68,13 +68,11 @@ export const getCategoriesAndDocuments = async () => {
   const collectionRef = collection(db, 'categories');
   //generate a query off this collection
   const q = query(collectionRef);
+
   //get a snapshot, fetch the snapshots
   const querySnapshot = await getDocs(q);
   //get an array of all of the individual documents
   return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
-
-
-
 };
 
 export const createUserDocumentFromAuth = async (
